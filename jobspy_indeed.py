@@ -41,7 +41,7 @@ def get_jobs(search_term, results_wanted):
     )
 
 def indeed_get_jobs(search_term)-> List[JobDescription]:
-    jobs = get_jobs(search_term, 50)
+    jobs = get_jobs(search_term, 25)
 
     result = []
     for index, job in jobs.iterrows():

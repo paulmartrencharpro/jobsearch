@@ -7,7 +7,7 @@ class JobDescription:
         self.company = company
         self.url = url
         self.company_url = company_url
-        self.published_at = None  # Initialize to None or a default value
+        self.published_at : datetime = datetime(1900, 1, 1)  # Initialize to None or a default value
         self.job_description = job_description
         self.organization_logo_url = ""
         self.ai_result : AIInformation = None
