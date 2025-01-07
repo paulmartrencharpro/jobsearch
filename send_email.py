@@ -9,8 +9,8 @@ def send_mail(content):
     receiver_email = "paul.martrenchar@gmail.com"
     password = os.environ.get('BREVO')
 
-    message = MIMEMultipart("alternative")
-    message["Subject"] = "GitHub Actions Email"
+    message = MIMEMultipart("related")
+    message["Subject"] = "Job offers"
     message["From"] = sender_email
     message["To"] = receiver_email
 

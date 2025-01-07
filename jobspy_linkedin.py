@@ -47,7 +47,11 @@ def linkedin_get_jobs(search_term)-> List[JobDescription]:
         job_desc = JobDescription(title=job["title"], company=job["company"], url=get_job_url(job), company_url=get_company_url(job),
                                   job_description=job["description"])
         published : date = job["date_posted"]
-        job_desc.published_at=datetime(published.year, published.month, published.day)
+        try:
+            published_at = datetime(published.year, published.month, published.day)
+        except:
+            published_at = datetime.today()
+        job_desc.published_at=published_at
         job_desc.organization_logo_url = get_logo(job)
         job_desc.salary_range = get_salary(job)
         result.append(job_desc)
