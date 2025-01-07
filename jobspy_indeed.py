@@ -1,6 +1,6 @@
 from jobspy import scrape_jobs
 from typing import List
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 
 from JobDescription import JobDescription
 
@@ -50,7 +50,7 @@ def indeed_get_jobs(search_term)-> List[JobDescription]:
                                   job_description=job["description"])
         published : date = job["date_posted"]
         try:
-            published_at = datetime(published.year, published.month, published.day)
+            published_at = datetime(published.year, published.month, published.day, tzinfo=timezone.utc)
         except:
             published_at = datetime.today()
         job_desc.published_at=published_at

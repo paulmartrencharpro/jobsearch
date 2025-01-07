@@ -31,7 +31,7 @@ def get_jobs(raw_search_term, platform) -> List[JobDescription]:
       
 
 def get_all_jobs():
-    search_terms = ["Content writer", "Digital Marketing", "Communication", "Business development", "SEO"]
+    search_terms = ["Content writer", "Digital Marketing"]#, "Communication", "Business development", "SEO"]
     platforms = ["Welcome to the jungle", "Indeed", "LinkedIn"]
 
     #Search all
