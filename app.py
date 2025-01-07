@@ -29,7 +29,10 @@ def get_jobs(raw_search_term, platform) -> List[JobDescription]:
     elif platform == "LinkedIn":
         return linkedin_get_jobs(search_term)
 
-      
+def localize_if_naive(dt, timezone):
+    if dt.tzinfo is None:
+        return timezone.localize(dt)
+    return dt   
 
 def get_all_jobs():
     search_terms = ["Content writer", "Digital Marketing"]#, "Communication", "Business development", "SEO"]
@@ -55,7 +58,7 @@ def get_all_jobs():
     #to make the published_at sortable
     utc = pytz.UTC
     for job in unique_jobs:
-        job.published_at = utc.localize(job.published_at)
+        job.published_at = localize_if_naive(job.published_at, utc)
 
     return sorted(all_jobs, key=lambda x: x.published_at, reverse=True)
             
