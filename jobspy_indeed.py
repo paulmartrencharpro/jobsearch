@@ -1,5 +1,6 @@
 from jobspy import scrape_jobs
 from typing import List
+from datetime import datetime
 
 from JobDescription import JobDescription
 
@@ -47,7 +48,7 @@ def indeed_get_jobs(search_term)-> List[JobDescription]:
     for index, job in jobs.iterrows():
         job_desc = JobDescription(title=job["title"], company=job["company"], url=get_job_url(job), company_url=get_company_url(job),
                                   job_description=job["description"])
-        job_desc.published_at=job["date_posted"]
+        job_desc.published_at=datetime.fromtimestamp(int(job["date_posted"]))
         job_desc.organization_logo_url = get_logo(job)
         job_desc.salary_range = get_salary(job)
         result.append(job_desc)
