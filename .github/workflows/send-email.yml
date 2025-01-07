@@ -19,60 +19,10 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: pip install python-jobspy
+      run: pip install python-jobspy markdownify beautifulsoup4 huggingface_hub
 
     - name: Send email
       env:
         BREVO: ${{ secrets.BREVO }}
       run: |
-        python - <<EOF
-        import smtplib
-        import os
-        import ssl
-        from email.mime.text import MIMEText
-        from email.mime.multipart import MIMEMultipart
-
-        sender_email = "bot.martrenchar@gmail.com"
-        identifier = "831031001@smtp-brevo.com"
-        receiver_email = "paul.martrenchar@gmail.com"
-        password = os.environ.get('BREVO')
-
-        message = MIMEMultipart("alternative")
-        message["Subject"] = "GitHub Actions Email"
-        message["From"] = sender_email
-        message["To"] = receiver_email
-
-        # Create the plain-text and HTML version of your message
-        text = """\
-        This is a test email sent from GitHub Actions!
-        """
-        html = """\
-        <html>
-          <body>
-            <p>This is a test email sent from <strong>GitHub Actions</strong>!</p>
-          </body>
-        </html>
-        """
-
-        # Turn these into plain/html MIMEText objects
-        part1 = MIMEText(text, "plain")
-        part2 = MIMEText(html, "html")
-
-        # Add HTML/plain-text parts to MIMEMultipart message
-        # The email client will try to render the last part first
-        message.attach(part1)
-        message.attach(part2)
-
-        # Create secure connection with server and send email
-        with smtplib.SMTP('smtp-relay.brevo.com', 587) as server:
-            # Enable security
-            server.starttls()
-            
-            # Login to the server
-            server.login(identifier, password)
-            
-            # Send email
-            server.sendmail(
-                sender_email, receiver_email, message.as_string()
-            )
-        EOF
+        python app.py

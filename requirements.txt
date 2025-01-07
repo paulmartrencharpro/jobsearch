@@ -1,0 +1,5 @@
+mistralai
+python-jobspy
+markdownify
+beautifulsoup4
+huggingface_hub
