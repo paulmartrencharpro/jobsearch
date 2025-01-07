@@ -24,5 +24,6 @@ jobs:
     - name: Send email
       env:
         BREVO: ${{ secrets.BREVO }}
+        HF: ${{ secrets.HF }}
       run: |
         python app.py
