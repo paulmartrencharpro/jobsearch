@@ -7,6 +7,7 @@ from jobspy_linkedin import linkedin_get_jobs
 from ai_manager import get_extra_information
 
 from send_email import send_mail
+import pytz
 
 def filterout_jobs(jobs : List[JobDescription]) -> List[JobDescription]:
     job_filter = ["marketing", "communication", "community", "business development", "experience", "social media", "brand", "ppc", "seo", "sea", "ads", "user acquisition", "adops", "consultant"]
@@ -44,13 +45,18 @@ def get_all_jobs():
     
     #merge
     seen_urls = set()
-    unique_jobs = []
+    unique_jobs : List[JobDescription] = []
 
     for obj in all_jobs:
         if obj.url not in seen_urls:
             seen_urls.add(obj.url)
             unique_jobs.append(obj)
     
+    #to make the published_at sortable
+    utc = pytz.UTC
+    for job in unique_jobs:
+        job.published_at = utc.localize(job.published_at)
+
     return sorted(all_jobs, key=lambda x: x.published_at, reverse=True)
             
 if __name__ == "__main__":
