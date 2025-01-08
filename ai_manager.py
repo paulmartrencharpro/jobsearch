@@ -3,11 +3,15 @@ from JobDescription import AIInformation
 import json
 
 def get_extra_information(company, offer) -> AIInformation:
+    return get_extra_information_loopable(company, offer, 0)
+
+def get_extra_information_loopable(company, offer, try_number) -> AIInformation:
     try:
         return _get_extra_information(company, offer)
     except json.decoder.JSONDecodeError as e:
-        #try again once
-        return _get_extra_information(company, offer)
+        if try_number > 5:
+            raise
+        return get_extra_information_loopable(company, offer, try_number + 1)
     except Exception as e:
         # Throw the error if it's not an SDKError
         raise
