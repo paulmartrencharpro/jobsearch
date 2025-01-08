@@ -23,7 +23,7 @@ jobs:
 
     - name: Send email
       env:
-        BREVO: ${{ secrets.BREVO }}
+        GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
         HF: ${{ secrets.HF }}
       run: |
         python app.py
