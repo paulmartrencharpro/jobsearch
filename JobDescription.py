@@ -87,7 +87,6 @@ class JobDescription:
 class AIInformation:
     def __init__(self, json_dump):
         obj = json.loads(json_dump)
-        print(obj)
         #Check result
         if not "company_description" in obj:
             obj["company_description"] = ""

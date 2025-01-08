@@ -27,3 +27,4 @@ def send_mail(content):
         server.sendmail(
             sender_email, receiver_email, message.as_string()
         )
+        print("Email sent")

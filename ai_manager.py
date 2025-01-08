@@ -42,5 +42,6 @@ Example:
 Offer:
 {}""".format(company, offer)
     result = call_ai(prompt, True)
+    print(result)
     return AIInformation(json_dump=result)
     
