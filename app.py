@@ -35,7 +35,7 @@ def localize_if_naive(dt, timezone):
     return dt   
 
 def get_all_jobs():
-    search_terms = ["Content writer", "Digital Marketing"]#, "Communication", "Business development", "SEO"]
+    search_terms = ["Content writer", "Digital Marketing", "Communication", "Business development", "SEO"]
     platforms = ["Welcome to the jungle", "Indeed", "LinkedIn"]
 
     #Search all

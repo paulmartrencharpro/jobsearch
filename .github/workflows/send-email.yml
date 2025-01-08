@@ -25,5 +25,8 @@ jobs:
       env:
         GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
         HF: ${{ secrets.HF }}
+        EMAIL_1: ${{ secrets.EMAIL_1 }}
+        EMAIL_2: ${{ secrets.EMAIL_2 }}
+        EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
       run: |
         python app.py

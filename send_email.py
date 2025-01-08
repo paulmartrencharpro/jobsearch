@@ -4,14 +4,13 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 def send_mail(content):
-    sender_email = "bot.martrenchar@gmail.com"
-    receiver_email = "paul.martrenchar@gmail.com"
+    sender_email = os.environ.get('EMAIL_SENDER')
     password = os.environ.get('GMAIL_PASSWORD')
-
+    receivers_email = [os.environ.get('EMAIL_1'), os.environ.get('EMAIL_2')]
     message = MIMEMultipart("related")
     message["Subject"] = "Job offers"
     message["From"] = sender_email
-    message["To"] = receiver_email
+    message["To"] = ", ".join(receivers_email)
 
     message.attach(MIMEText(content, "html"))
 
@@ -25,6 +24,6 @@ def send_mail(content):
         
         # Send email
         server.sendmail(
-            sender_email, receiver_email, message.as_string()
+            sender_email, receivers_email, message.as_string()
         )
         print("Email sent")
