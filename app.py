@@ -7,6 +7,7 @@ from jobspy_linkedin import linkedin_get_jobs
 from ai_manager import get_extra_information
 
 from send_email import send_mail
+from datetime import datetime, timedelta
 import pytz
 
 def filterout_jobs(jobs : List[JobDescription]) -> List[JobDescription]:
@@ -60,7 +61,15 @@ def get_all_jobs():
     for job in unique_jobs:
         job.published_at = localize_if_naive(job.published_at, utc)
 
-    return sorted(all_jobs, key=lambda x: x.published_at, reverse=True)
+    # remove the ones that are more than 1 week old
+    now = datetime.now()
+    # Calculate the time one week ago
+    one_week_ago = now - timedelta(weeks=1)
+
+    # Filter the jobs
+    filtered_jobs = [job for job in unique_jobs if job.published_at >= one_week_ago]
+
+    return sorted(filtered_jobs, key=lambda x: x.published_at, reverse=True)
             
 if __name__ == "__main__":
     jobs = get_all_jobs()
