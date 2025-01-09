@@ -62,7 +62,7 @@ def get_all_jobs():
         job.published_at = localize_if_naive(job.published_at, utc)
 
     # remove the ones that are more than 1 week old
-    now = datetime.now()
+    now = localize_if_naive(datetime.now(), utc)
     # Calculate the time one week ago
     one_week_ago = now - timedelta(weeks=1)
 
