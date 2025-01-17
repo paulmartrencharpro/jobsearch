@@ -97,11 +97,11 @@ class AIInformation:
         if not "experience_requirements" in obj:
             obj["experience_requirements"] = ""
         if not "is_an_internship" in obj:
-            obj["is_an_internship"] = False
+            obj["is_an_internship"] = True
         if not "salary_range" in obj:
             obj["salary_range"] = ""
         if not "should_apply" in obj:
-            obj["should_apply"] = True
+            obj["should_apply"] = False
 
         self.company_description = obj["company_description"]
         self.position_summary = obj["position_summary"]

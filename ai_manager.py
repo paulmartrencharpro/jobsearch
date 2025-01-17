@@ -10,8 +10,8 @@ def get_extra_information_loopable(company, offer, try_number) -> AIInformation:
         return _get_extra_information(company, offer)
     except json.decoder.JSONDecodeError as e:
         if try_number > 5:
-            raise
-        return get_extra_information_loopable(company, offer, try_number + 1)
+            return AIInformation(json_dump="{}")
+        return get_extra_information_loopable(company, offer + " ", try_number + 1)
     except Exception as e:
         # Throw the error if it's not an SDKError
         raise
