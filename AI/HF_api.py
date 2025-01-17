@@ -5,13 +5,6 @@ import os
 login(os.getenv('HF'))
 
 def call_ai(prompt, json_mode):
-    try:
-        return _call_ai(prompt, json_mode)
-    except Exception as e:
-        # Throw the error if it's not an SDKError
-        raise
-
-def _call_ai(prompt, json_mode):
     client = InferenceClient("mistralai/Mistral-Nemo-Instruct-2407")
 
     extra_param = {}
