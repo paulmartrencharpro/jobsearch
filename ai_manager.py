@@ -1,4 +1,4 @@
-from AI.HF_api import call_ai
+from AI.mistral import call_ai
 from JobDescription import AIInformation
 import json
 
