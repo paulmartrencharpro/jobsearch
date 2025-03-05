@@ -20,7 +20,7 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: pip install python-jobspy markdownify beautifulsoup4 huggingface_hub
+      run: pip install python-jobspy markdownify beautifulsoup4 huggingface_hub mistralai
 
     - name: Send email
       env:
