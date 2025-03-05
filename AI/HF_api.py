@@ -5,7 +5,7 @@ import os
 login(os.getenv('HF'))
 
 def call_ai(prompt, json_mode):
-    client = InferenceClient("mistralai/Mistral-Nemo-Instruct-2407")
+    client = InferenceClient("mistralai/Mistral-Small-24B-Instruct-2501")
 
     extra_param = {}
     if json_mode:
