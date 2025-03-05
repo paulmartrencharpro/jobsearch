@@ -29,5 +29,6 @@ jobs:
         EMAIL_1: ${{ secrets.EMAIL_1 }}
         EMAIL_2: ${{ secrets.EMAIL_2 }}
         EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+        MISTRAL_KEY: ${{ secrets.MISTRAL_KEY }}
       run: |
         python app.py
