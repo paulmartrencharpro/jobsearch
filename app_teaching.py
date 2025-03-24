@@ -81,4 +81,4 @@ if __name__ == "__main__":
             if job.ai_result.is_an_internship == False:
                 result.append(job.to_html())
         result.append("</body></html>")
-        send_mail(" ".join(result))
+        send_mail("Teaching job offers", " ".join(result))

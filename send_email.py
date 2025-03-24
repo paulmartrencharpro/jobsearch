@@ -3,12 +3,12 @@ import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def send_mail(content):
+def send_mail(subject, content):
     sender_email = os.environ.get('EMAIL_SENDER')
     password = os.environ.get('GMAIL_PASSWORD')
     receivers_email = [os.environ.get('EMAIL_1'), os.environ.get('EMAIL_2')]
     message = MIMEMultipart("related")
-    message["Subject"] = "Job offers"
+    message["Subject"] = subject
     message["From"] = sender_email
     message["To"] = ", ".join(receivers_email)
 
