@@ -32,3 +32,29 @@ jobs:
         MISTRAL_KEY: ${{ secrets.MISTRAL_KEY }}
       run: |
         python app.py
+  send-email-teaching:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install python-jobspy markdownify beautifulsoup4 huggingface_hub mistralai
+
+    - name: Send email
+      env:
+        GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+        HF: ${{ secrets.HF }}
+        EMAIL_1: ${{ secrets.EMAIL_1 }}
+        EMAIL_2: ${{ secrets.EMAIL_2 }}
+        EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+        MISTRAL_KEY: ${{ secrets.MISTRAL_KEY }}
+      run: |
+        python app_teaching.py        
+    
