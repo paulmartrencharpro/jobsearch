@@ -12,7 +12,6 @@ import pytz
 
 def get_jobs(raw_search_term, platform) -> List[JobDescription]:
     search_term = '"' + raw_search_term + '"'
-    print(f"Search for {search_term} on {platform}")
 
     if platform == "Indeed":
         return indeed_get_jobs(search_term)
