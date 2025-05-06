@@ -82,3 +82,5 @@ if __name__ == "__main__":
                 result.append(job.to_html())
         result.append("</body></html>")
         send_mail("Teaching job offers", " ".join(result))
+    else:
+        print("No jobs today :(")
