@@ -45,6 +45,8 @@ def get_all_jobs():
         for platform in platforms:
             jobs : List[JobDescription] = get_jobs(search_term, platform)
             selected_jobs = filterout_jobs(jobs)
+            jobs_found = len(selected_jobs)
+            print(f"Found {jobs_found} jobs for {search_term} on {platform}")
             all_jobs = all_jobs + selected_jobs
     
     #merge
