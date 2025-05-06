@@ -10,18 +10,9 @@ from send_email import send_mail
 from datetime import datetime, timedelta
 import pytz
 
-def filterout_jobs(jobs : List[JobDescription]) -> List[JobDescription]:
-    #job_filter = ["marketing", "communication", "community", "business development", "experience", "social media", "brand", "ppc", "seo", "sea", "ads", "user acquisition", "adops", "consultant"]
-    job_filter_negative = ["stage", "stagiaire", "alternant", "alternance", "intern", "internship", "apprenti"]
-    selected_jobs : List[JobDescription] = []
-    for job in jobs:
-        if not any(item in job.title.lower() for item in job_filter_negative):
-            selected_jobs.append(job)
-    
-    return selected_jobs
-
 def get_jobs(raw_search_term, platform) -> List[JobDescription]:
     search_term = '"' + raw_search_term + '"'
+    print(f"Search for {search_term} on {platform}")
 
     if platform == "Indeed":
         return indeed_get_jobs(search_term)
@@ -44,10 +35,9 @@ def get_all_jobs():
     for search_term in search_terms:
         for platform in platforms:
             jobs : List[JobDescription] = get_jobs(search_term, platform)
-            selected_jobs = filterout_jobs(jobs)
-            jobs_found = len(selected_jobs)
+            jobs_found = len(jobs)
             print(f"Found {jobs_found} jobs for {search_term} on {platform}")
-            all_jobs = all_jobs + selected_jobs
+            all_jobs.extend(jobs)
     
     #merge
     seen_urls = set()
