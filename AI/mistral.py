@@ -37,5 +37,5 @@ def _call_ai(prompt, json_mode):
         ],
         **extra_param
     )
-
+    
     return chat_response.choices[0].message.content
