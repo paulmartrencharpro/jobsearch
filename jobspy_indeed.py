@@ -27,12 +27,12 @@ def get_logo(job):
     except:
         return "https://e7.pngegg.com/pngimages/153/807/png-clipart-timer-clock-computer-icons-unknown-planet-digital-clock-time.png"
 
-def get_jobs(search_term, results_wanted):
+def get_jobs(search_term, job_type, results_wanted):
     return scrape_jobs(
         site_name=["indeed"],#, "linkedin", "glassdoor"],
         search_term=search_term,
         location="Paris, France",
-        job_type="fulltime",
+        job_type=job_type,
         results_wanted=results_wanted,
         #hours_old=240, # (only Linkedin/Indeed is hour specific, others round up to days old)
         country_indeed='France',  # only needed for indeed / glassdoor
@@ -41,8 +41,8 @@ def get_jobs(search_term, results_wanted):
         linkedin_fetch_description=False, # get more info such as full description, direct job url for linkedin (slower)
     )
 
-def indeed_get_jobs(search_term)-> List[JobDescription]:
-    jobs = get_jobs(search_term, 25)
+def indeed_get_jobs(search_term, job_type="fulltime")-> List[JobDescription]:
+    jobs = get_jobs(search_term, job_type, 25)
 
     result = []
     for index, job in jobs.iterrows():
