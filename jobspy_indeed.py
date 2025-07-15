@@ -37,8 +37,6 @@ def get_jobs(search_term, job_type, results_wanted):
         #hours_old=240, # (only Linkedin/Indeed is hour specific, others round up to days old)
         country_indeed='France',  # only needed for indeed / glassdoor
         enforce_annual_salary=True,
-
-        linkedin_fetch_description=False, # get more info such as full description, direct job url for linkedin (slower)
     )
 
 def indeed_get_jobs(search_term, job_type="fulltime")-> List[JobDescription]:

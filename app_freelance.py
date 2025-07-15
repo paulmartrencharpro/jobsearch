@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import pytz
 
 def filterout_jobs(jobs : List[JobDescription]) -> List[JobDescription]:
-    job_filter = ["marketing", "communication", "community", "business development", "experience", "social media", "brand", "ppc", "seo", "sea", "ads", "user acquisition", "adops", "consultant"]
+    job_filter = ["marketing", "communication", "community", "business development", "experience", "social media", "Digital Acquisition", "brand", "ppc", "seo", "sea", "ads", "user acquisition", "adops", "consultant"]
     job_filter_negative = ["stage", "stagiaire", "alternant", "alternance", "intern", "internship", "apprenti"]
     selected_jobs : List[JobDescription] = []
     for job in jobs:
@@ -18,8 +18,8 @@ def filterout_jobs(jobs : List[JobDescription]) -> List[JobDescription]:
     
     return selected_jobs
 
-def get_jobs(raw_search_term) -> List[JobDescription]:
-    search_term = '"' + raw_search_term + '" freelance'
+def get_jobs(raw_search_term, freelance_term) -> List[JobDescription]:
+    search_term = f'"' + raw_search_term + '" ' + freelance_term
     return indeed_get_jobs(search_term, job_type="")
 
 def localize_if_naive(dt, timezone):
@@ -29,13 +29,15 @@ def localize_if_naive(dt, timezone):
 
 def get_all_jobs():
     search_terms = ["Content writer", "Digital Marketing", "Communication", "SEO"]
+    freelance_terms = ["freelance", "auto-entrepreneur", "indépendant"]
 
     #Search all
     all_jobs : List[JobDescription] = []
     for search_term in search_terms:
-        jobs : List[JobDescription] = get_jobs(search_term)
-        selected_jobs = filterout_jobs(jobs)
-        all_jobs = all_jobs + selected_jobs
+        for freelance_term in freelance_terms:
+            jobs : List[JobDescription] = get_jobs(search_term, freelance_term)
+            selected_jobs = filterout_jobs(jobs)
+            all_jobs = all_jobs + selected_jobs
     
     #merge
     seen_urls = set()
