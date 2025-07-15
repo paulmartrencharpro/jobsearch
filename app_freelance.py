@@ -2,8 +2,6 @@ from typing import List
 from JobDescription import JobDescription
 
 from jobspy_indeed import indeed_get_jobs
-from WelcomeToTheJungle import wtoj_get_jobs
-from jobspy_linkedin import linkedin_get_jobs
 from ai_manager import get_extra_information
 
 from send_email import send_mail
@@ -22,7 +20,7 @@ def filterout_jobs(jobs : List[JobDescription]) -> List[JobDescription]:
 
 def get_jobs(raw_search_term) -> List[JobDescription]:
     search_term = '"' + raw_search_term + '" freelance'
-    return indeed_get_jobs(search_term, job_type="contract")
+    return indeed_get_jobs(search_term, job_type="")
 
 def localize_if_naive(dt, timezone):
     if dt.tzinfo is None:
