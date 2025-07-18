@@ -2,7 +2,7 @@ from mistralai import Mistral, SDKError
 from time import sleep
 import os
 
-models = ["mistral-small-latest", "open-mistral-nemo"]
+models = ["mistral-small-latest", "mistral-small-2501", "mistral-small-2503"]
 
 import random
 def get_model():
