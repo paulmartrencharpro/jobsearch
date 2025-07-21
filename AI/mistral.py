@@ -2,11 +2,8 @@ from mistralai import Mistral, SDKError
 from time import sleep
 import os
 
-models = ["mistral-small-latest", "mistral-small-2501", "mistral-small-2503"]
-
-import random
 def get_model():
-    return random.choice(models)
+    return "mistral-small-latest"
 
 def call_ai(prompt, json_mode):
     try:
