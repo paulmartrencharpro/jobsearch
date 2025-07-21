@@ -13,7 +13,7 @@ def call_ai(prompt, json_mode):
         return _call_ai(prompt, json_mode)
     except SDKError as e:
         #Wait, then try again once
-        sleep(5)
+        sleep(30)
         return _call_ai(prompt, json_mode)
     except Exception as e:
         # Throw the error if it's not an SDKError
