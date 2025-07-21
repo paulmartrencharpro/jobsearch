@@ -24,6 +24,7 @@ def _get_extra_information(company, offer) -> AIInformation:
 - language_requirements: The language requirements, noting if the offer is written in French or English.
 - experience_requirements: The required experience for the position.
 - is_an_internship: Boolean indicating if the position is an internship.
+- high_experience: Boolean indicating if the job requires at least 5 years of experience.
 - salary_range: The yearly salary range if stated, otherwise 'unknown'.
 - should_apply: Boolean indicating if the offer requires no more than 2 years of work experience and only requires languages among English, French, Hindi, or Nepali.
 
@@ -40,6 +41,7 @@ Example:
   "language_requirements": "Fluent French, Native English (Offer in English)",
   "experience_requirements": "2 years in a similar role",
   "is_an_internship": false,
+  "high_experience": false,
   "salary_range": "€38,000-€42,000",
   "should_apply": true
 }}

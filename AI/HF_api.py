@@ -17,10 +17,11 @@ def call_ai(prompt, json_mode):
             "language_requirements": {"type": "string"},
             "experience_requirements": {"type": "string"},
             "is_an_internship": {"type": "boolean"},
+            "high_experience": {"type": "boolean"},
             "salary_range": {"type": "string"},
             "should_apply": {"type": "boolean"},
         },
-        "required": ["company_description", "position_summary", "experience_requirements", "language_requirements", "is_an_internship", "salary_range", "should_apply"],
+        "required": ["company_description", "position_summary", "experience_requirements", "language_requirements", "is_an_internship", "high_experience", "salary_range", "should_apply"],
     }} }
 
     chat_response = client.chat_completion(

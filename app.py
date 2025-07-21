@@ -66,10 +66,10 @@ def get_all_jobs():
     for job in unique_jobs:
         job.published_at = localize_if_naive(job.published_at, utc)
 
-    # remove the ones that are more than 1 week old
+    # remove the ones that are more than 4.5 days old
     now = localize_if_naive(datetime.now(), utc)
-    # Calculate the time one week ago
-    one_week_ago = now - timedelta(weeks=1)
+    # Calculate the time 4.5 days ago
+    one_week_ago = now - timedelta(days=4.5)
 
     # Filter the jobs
     filtered_jobs = [job for job in unique_jobs if job.published_at >= one_week_ago]
@@ -83,7 +83,7 @@ if __name__ == "__main__":
         result = ["<html><head><style>.job{display: flex;width:70%;margin: 5px auto;border: 1px solid;border-radius: 5px;}.logobox{flex: 1;display: flex;align-items: center;justify-content: center;}.logo{width:100px;height:100px}h4{margin: 2px;}</style></head><body>"]
         for job in jobs:
             job.ai_result = get_extra_information(job.company, job.job_description)
-            if job.ai_result.is_an_internship == False:
+            if job.ai_result.is_an_internship == False and job.ai_result.high_experience == False:
                 result.append(job.to_html())
         result.append("</body></html>")
         send_mail("Job offers", " ".join(result))

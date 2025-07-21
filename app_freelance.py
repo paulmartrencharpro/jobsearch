@@ -75,7 +75,7 @@ if __name__ == "__main__":
         result = ["<html><head><style>.job{display: flex;width:70%;margin: 5px auto;border: 1px solid;border-radius: 5px;}.logobox{flex: 1;display: flex;align-items: center;justify-content: center;}.logo{width:100px;height:100px}h4{margin: 2px;}</style></head><body>"]
         for job in jobs:
             job.ai_result = get_extra_information(job.company, job.job_description)
-            if job.ai_result.is_an_internship == False:
+            if job.ai_result.is_an_internship == False and job.ai_result.high_experience == False:
                 result.append(job.to_html())
         result.append("</body></html>")
         send_mail("Job offers - Freelance", " ".join(result))
