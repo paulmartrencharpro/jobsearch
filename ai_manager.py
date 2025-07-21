@@ -37,7 +37,7 @@ Example:
     "Manage marketing/communication plan.",
     "Ensure brand image and monitor e-reputation."
   ],
-  "language_requirements": "Fluent French, Native. Offer is in English",
+  "language_requirements": "Fluent French, Native English (Offer in English)",
   "experience_requirements": "2 years in a similar role",
   "is_an_internship": false,
   "salary_range": "€38,000-€42,000",
