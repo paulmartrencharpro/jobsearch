@@ -9,13 +9,18 @@ from ai_manager import get_extra_information
 from send_email import send_mail
 from datetime import datetime, timedelta
 import pytz
+import re
+
+def match_whole_words(words, text):
+    return any(re.search(rf'\b{re.escape(word)}\b', text) for word in words)
 
 def filterout_jobs(jobs : List[JobDescription]) -> List[JobDescription]:
-    job_filter = ["marketing", "communication", "community", "business development", "experience", "social media", "brand", "ppc", "seo", "sea", "ads", "user acquisition", "adops", "consultant"]
+    job_filter = ["marketing", "communication", "community", "content", "digital", "Responsable contenu", "business development", "experience", "social media", "Digital Acquisition", "brand", "ppc", "seo", "sea", "ads", "user acquisition", "adops", "consultant"]
     job_filter_negative = ["stage", "stagiaire", "alternant", "alternance", "intern", "internship", "apprenti"]
     selected_jobs : List[JobDescription] = []
     for job in jobs:
-        if not any(item in job.title.lower() for item in job_filter_negative) and any(item in job.title.lower() for item in job_filter):
+        title = job.title.lower()
+        if not match_whole_words(job_filter_negative, title) and match_whole_words(job_filter, title):
             selected_jobs.append(job)
     
     return selected_jobs
