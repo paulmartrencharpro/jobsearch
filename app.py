@@ -6,6 +6,7 @@ from WelcomeToTheJungle import wtoj_get_jobs
 from jobspy_linkedin import linkedin_get_jobs
 from ai_manager import get_extra_information
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from send_email import send_mail
 from datetime import datetime, timedelta
 import pytz
@@ -38,7 +39,15 @@ def get_jobs(raw_search_term, platform) -> List[JobDescription]:
 def localize_if_naive(dt, timezone):
     if dt.tzinfo is None:
         return timezone.localize(dt)
-    return dt   
+    return dt
+
+def process_search_on_platform(platform, search_terms) -> List[JobDescription]:
+    platform_jobs = []
+    for search_term in search_terms:
+        jobs: List[JobDescription] = get_jobs(search_term, platform)
+        selected_jobs = filterout_jobs(jobs)
+        platform_jobs.extend(selected_jobs)
+    return platform_jobs
 
 def get_all_jobs():
     search_terms = ["Content writer", "Digital Marketing", "Communication", "Business development", "SEO"]
@@ -46,11 +55,12 @@ def get_all_jobs():
 
     #Search all
     all_jobs : List[JobDescription] = []
-    for search_term in search_terms:
-        for platform in platforms:
-            jobs : List[JobDescription] = get_jobs(search_term, platform)
-            selected_jobs = filterout_jobs(jobs)
-            all_jobs = all_jobs + selected_jobs
+    #Runs the search for each platform in //
+    with ThreadPoolExecutor() as executor:
+        futures = [executor.submit(process_search_on_platform, platform, search_terms) for platform in platforms]
+
+    for future in as_completed(futures):
+        all_jobs.extend(future.result())
     
     #merge
     seen_urls = set()

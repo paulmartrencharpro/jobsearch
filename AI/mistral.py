@@ -13,8 +13,15 @@ def call_ai(prompt, json_mode):
         return _call_ai(prompt, json_mode)
     except SDKError as e:
         #Wait, then try again once
-        sleep(30)
-        return _call_ai(prompt, json_mode)
+        print(f"failed once - {e.message}")
+        sleep(10)
+        try:
+            return _call_ai(prompt, json_mode)
+        except SDKError as e:
+            #Wait, then try again once
+            print(f"failed twice - {e.message}")
+            sleep(65)
+            return _call_ai(prompt, json_mode)
     except Exception as e:
         # Throw the error if it's not an SDKError
         raise
