@@ -98,6 +98,8 @@ class AIInformation:
             obj["experience_requirements"] = ""
         if not "is_an_internship" in obj:
             obj["is_an_internship"] = True
+        if not "high_experience" in obj:
+            obj["high_experience"] = False
         if not "salary_range" in obj:
             obj["salary_range"] = ""
         if not "should_apply" in obj:
@@ -108,6 +110,7 @@ class AIInformation:
         self.language_requirements = obj["language_requirements"]
         self.experience_requirements = obj["experience_requirements"]
         self.is_an_internship = obj["is_an_internship"]
+        self.high_experience = obj["high_experience"]
         self.salary_range = obj["salary_range"]
         self.should_apply : bool = obj["should_apply"]
     
@@ -118,6 +121,7 @@ class AIInformation:
             "language_requirements": self.language_requirements,
             "experience_requirements": self.experience_requirements,
             "is_an_internship": self.is_an_internship,
+            "high_experience": self.high_experience,
             "salary_range": self.salary_range,
             "should_apply": self.should_apply
         }
