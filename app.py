@@ -49,10 +49,17 @@ def process_search_on_platform(platform, search_terms) -> List[JobDescription]:
         platform_jobs.extend(selected_jobs)
     return platform_jobs
 
+from datetime import datetime
+
+def log(message):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"{timestamp} - {message}")
+
 def get_all_jobs():
     search_terms = ["Content writer", "Digital Marketing", "Communication", "Business development", "SEO"]
     platforms = ["Welcome to the jungle", "Indeed", "LinkedIn"]
 
+    log("Start searching for jobs")
     #Search all
     all_jobs : List[JobDescription] = []
     #Runs the search for each platform in //
@@ -83,6 +90,7 @@ def get_all_jobs():
 
     # Filter the jobs
     filtered_jobs = [job for job in unique_jobs if job.published_at >= one_week_ago]
+    log("Done searching for jobs")
 
     return sorted(filtered_jobs, key=lambda x: x.published_at, reverse=True)
             

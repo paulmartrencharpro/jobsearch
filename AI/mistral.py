@@ -7,6 +7,7 @@ def get_model():
 
 def call_ai(prompt, json_mode):
     try:
+        sleep(0.1)
         return _call_ai(prompt, json_mode)
     except SDKError as e:
         #Wait, then try again once
@@ -23,8 +24,21 @@ def call_ai(prompt, json_mode):
         # Throw the error if it's not an SDKError
         raise
 
+import time
+from datetime import datetime
+
+def log(message):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"{timestamp} - {message}")
+
 def _call_ai(prompt, json_mode):
-    sleep(0.1)
+    start = time.perf_counter()
+    result = __call_ai(prompt, json_mode)
+    duration = time.perf_counter() - start
+    log(f"AI call took {duration:.4f} seconds")
+    return result
+
+def __call_ai(prompt, json_mode):
     client = Mistral(api_key=os.getenv('MISTRAL_KEY'))
 
     extra_param = {}
