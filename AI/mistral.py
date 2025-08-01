@@ -7,7 +7,6 @@ def get_model():
 
 def call_ai(prompt, json_mode):
     try:
-        sleep(0.1)
         return _call_ai(prompt, json_mode)
     except SDKError as e:
         #Wait, then try again once
