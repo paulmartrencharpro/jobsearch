@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 
 class JobDescription:
-    def __init__(self, title, company, url, company_url, job_description):
+    def __init__(self, title: str, company: str, url: str, company_url: str, job_description : str, from_platform: str):
         self.title = title
         self.company = company
         self.url = url
@@ -12,6 +12,8 @@ class JobDescription:
         self.organization_logo_url = ""
         self.ai_result : AIInformation = None
         self.salary_range = ""
+        self.from_platform = from_platform
+
     
     def to_dict(self):
         return {
@@ -23,7 +25,8 @@ class JobDescription:
             "job_description": self.job_description,
             "organization_logo_url": self.organization_logo_url,
             "ai_result": self.ai_result.to_dict() if self.ai_result else None,
-            "salary_range": self.salary_range
+            "salary_range": self.salary_range,
+            "from_platform": self.from_platform
         }
 
     @staticmethod
@@ -40,6 +43,7 @@ class JobDescription:
         job_desc.organization_logo_url = data["organization_logo_url"]
         job_desc.ai_result = ai_result
         job_desc.salary_range = data["salary_range"]
+        job_desc.from_platform = data["from_platform"]
         return job_desc
     
     def format_should_apply(self, should_apply : bool):

@@ -159,7 +159,7 @@ def apec_get_jobs(search_term)-> List[JobDescription]:
     for job in jobs:
         offer, logo = get_offer_and_logo(job["offer_number"])
         job_desc = JobDescription(title=job["name"], company=job["organization_name"], url=job["URL"], company_url=job["URL"],
-                                  job_description=offer)
+                                  job_description=offer, from_platform="APEC")
         job_desc.published_at=job["published_at"]
         job_desc.organization_logo_url = logo
         job_desc.salary_range = job["salary_range"]

@@ -108,3 +108,18 @@ if __name__ == "__main__":
                 result.append(job.to_html())
         result.append("</body></html>")
         send_mail("Job offers", " ".join(result))
+
+        #Stats
+        from collections import Counter
+        # Count occurrences of each from_platform
+        filtered_jobs = [
+            job for job in jobs
+            if not job.ai_result.is_an_internship and not job.ai_result.high_experience
+        ]
+        platform_counts = Counter(job.from_platform for job in filtered_jobs)
+
+        # Sort by from_platform alphabetically
+        sorted_counts = dict(sorted(platform_counts.items()))
+        print("Stats:")
+        for platform, count in sorted_counts.items():
+            print(f"{platform}: {count}")

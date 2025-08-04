@@ -45,7 +45,7 @@ def indeed_get_jobs(search_term, job_type="fulltime")-> List[JobDescription]:
     result = []
     for index, job in jobs.iterrows():
         job_desc = JobDescription(title=job["title"], company=job["company"], url=get_job_url(job), company_url=get_company_url(job),
-                                  job_description=job["description"])
+                                  job_description=job["description"], from_platform="Indeed")
         published : date = job["date_posted"]
         try:
             published_at = datetime(published.year, published.month, published.day, tzinfo=timezone.utc)

@@ -98,7 +98,7 @@ def wtoj_get_jobs(search_term)-> List[JobDescription]:
     result = []
     for job in jobs:
         job_desc = JobDescription(title=job["name"], company=job["organization_name"], url=job["URL"], company_url=job["company_url"],
-                                  job_description=get_offer(job["URL"]))
+                                  job_description=get_offer(job["URL"]), from_platform="WelcomeToTheJungle")
         job_desc.published_at=job["published_at"]
         job_desc.organization_logo_url = job["organization_logo_url"]
         job_desc.salary_range = ""
