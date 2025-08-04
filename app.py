@@ -4,6 +4,7 @@ from JobDescription import JobDescription
 from jobspy_indeed import indeed_get_jobs
 from WelcomeToTheJungle import wtoj_get_jobs
 from jobspy_linkedin import linkedin_get_jobs
+from apec import apec_get_jobs
 from ai_manager import get_extra_information
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -35,6 +36,8 @@ def get_jobs(raw_search_term, platform) -> List[JobDescription]:
         return wtoj_get_jobs(search_term)
     elif platform == "LinkedIn":
         return linkedin_get_jobs(search_term)
+    elif platform == "APEC":
+        return apec_get_jobs(search_term)
 
 def localize_if_naive(dt, timezone):
     if dt.tzinfo is None:
@@ -57,7 +60,7 @@ def log(message):
 
 def get_all_jobs():
     search_terms = ["Content writer", "Digital Marketing", "Communication", "Business development", "SEO"]
-    platforms = ["Welcome to the jungle", "Indeed", "LinkedIn"]
+    platforms = ["Welcome to the jungle", "Indeed", "LinkedIn", "APEC"]
 
     log("Start searching for jobs")
     #Search all
